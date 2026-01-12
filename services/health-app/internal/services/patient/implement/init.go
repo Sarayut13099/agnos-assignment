@@ -6,10 +6,10 @@ import (
 )
 
 type patientService struct {
-	hisApi *external.HISAPIClient
+	hisApi external.HISAPI
 }
 
-func NewPatientService(hisApi *external.HISAPIClient) patient.Services {
+func NewPatientService(hisApi external.HISAPI) patient.Services {
 	return &patientService{
 		hisApi: hisApi,
 	}

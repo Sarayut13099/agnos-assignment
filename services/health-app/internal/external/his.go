@@ -15,7 +15,12 @@ type HISAPIClient struct {
 	client *http.Client
 }
 
-func NewHISAPIClient() *HISAPIClient {
+type HISAPI interface {
+	GetPatientByID(ctx context.Context, baseURL, id string) (*patient.Patient, error)
+	SearchPatients(ctx context.Context, baseURL string, filters patient.PatientsSearchRequest) ([]*patient.Patient, error)
+}
+
+func NewHISAPIClient() HISAPI {
 	return &HISAPIClient{
 		client: &http.Client{
 			Timeout: 10 * time.Second,
