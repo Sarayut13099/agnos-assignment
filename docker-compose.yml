@@ -9,11 +9,11 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: adminpass
     ports:
-      - "5432:5432"               # สำหรับ DBeaver
+      - "5432:5432"               
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./postgres/health-app/init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:                  # ✅ รอ DB ready
+    healthcheck:                 
       test: ["CMD-SHELL", "pg_isready -U admin -d health_app"]
       interval: 5s
       timeout: 5s
@@ -29,11 +29,11 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: adminpass
     ports:
-      - "5433:5432"               # สำหรับ DBeaver
+      - "5433:5432"               
     volumes:
       - pgdata_his:/var/lib/postgresql/data
       - ./postgres/his/init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:                  # ✅ รอ DB ready
+    healthcheck:                  
       test: ["CMD-SHELL", "pg_isready -U admin -d his_db"]
       interval: 5s
       timeout: 5s
@@ -50,7 +50,7 @@ services:
       POSTGRES_PASSWORD: adminpass
       POSTGRES_DBNAME: health_app
       POSTGRES_SSLMODE: disable
-    depends_on:                   # ✅ รอ DB healthy
+    depends_on:                   
       postgres:
         condition: service_healthy
     networks:
@@ -65,7 +65,7 @@ services:
       POSTGRES_PASSWORD: adminpass
       POSTGRES_DBNAME: his_db
       POSTGRES_SSLMODE: disable
-    depends_on:                   # ✅ รอ DB healthy
+    depends_on:                   
       postgres_his:
         condition: service_healthy
     networks:
